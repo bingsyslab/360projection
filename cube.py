@@ -17,10 +17,6 @@ def yrotation(th):
   s = np.sin(th)
   return np.array([[c, 0, s], [0, 1, 0], [-s, 0, c]])
 
-def zrotation(th):
-  c = np.cos(th)
-  s = np.sin(th)
-  return np.array([[c, -s, 0], [s, c, 0], [0, 0, 1]])
 
 class Face:
   def __init__(self, descr, img, pv, xprj, yprj, expand_coef, rotate, yaw=0, pitch=0):
@@ -46,11 +42,6 @@ class Face:
     self.xprj = np.dot(m, self.xprj)
     self.yprj = np.dot(m, self.yprj)
     
-
-  def translate(self, v):
-    self.plane_pt += v
-    self.k = np.dot(self.plane_pt, self.pv)
-
 
   def intersect(self, lv, pr = False):
     """
