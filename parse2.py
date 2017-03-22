@@ -57,7 +57,7 @@ def video_prop_iter(parsed_json):
 
 class VideoFinder:
   def __init__(self):
-    with open('viewportalresponse2.json','rb') as j:
+    with open('viewportalresponse2.json', 'rb') as j:
       parsed_json = json.load(j)
       
     self.video_dct = dict(video_prop_iter(parsed_json))
