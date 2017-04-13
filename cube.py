@@ -1,8 +1,5 @@
 import cv2
 import numpy as np
-from parse2 import VideoFinder
-
-video_finder = VideoFinder()
 
 def deg2rad(d):
   return float(d) * np.pi / 180
@@ -241,16 +238,6 @@ class Cube:
       pts = np.rint(np.dot(pts, np.dot(f.get_face_prj(), f.get_img_prj()))).astype(np.int)
        
       equi_image[DI[fvecs, 1], DI[fvecs, 0]] = f.img[pts[:, 1], pts[:, 0]]
-      
-
-class CubeFromFile(Cube):
-  def __init__(self, img, fname):
-    vp = video_finder.get_video(fname)
-    Cube.__init__(self, img, \
-                  float(vp.FBExpand_coef), float(vp.FBOffcenter_z), \
-                  deg2rad(vp.FBYaw), deg2rad(vp.FBPitch), \
-                  vp.playlist == u'playlist', \
-                  vp.FBIs_stereoscopic == 'true')
 
 
 def offaxis_cube_to_equi_np(img, yaw, pitch, expand_coef, offcenter_z):  
@@ -267,13 +254,15 @@ def offaxis_cube_to_render_np(theta0, phi0, yaw, pitch, offcenter_z, fov_h, fov_
   
   cv2.imwrite('rendered_image_%d_%d.bmp' % (theta0, phi0), rendered_image)
 
+
 if __name__ == '__main__':
-  img = cv2.imread('scene.jpg')
+  img = cv2.imread('../scene_1/scene00181-oculus.jpg')
 
   expand_coef = 1.03125
   offcenter_z = -0.7
   
   # assume yaw and pitch of the center of cube's front face are both 0
+  # in rad
   yaw = 0
   pitch = 0
   # draw offaxis cube onto equirectangular
