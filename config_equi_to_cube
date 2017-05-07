@@ -1,0 +1,18 @@
+{
+  "input" : {
+    "equi" : {}
+  },
+  "output" : {
+    "resolution" : {
+      "width" : 1500
+    },
+    "cube" : {
+      "orientation" : {
+        "yaw" : 0,
+        "pitch" : 0
+      },
+      "expand_coef" : 1.01,
+      "offset" : 0
+    }
+  }
+}

@@ -75,46 +75,47 @@ def equi_to_cube(face_size, img):
   ii = render_image_np(np.pi / 2, np.pi, \
                       np.pi / 2, np.pi / 2, \
                       face_size, img)
-  cv2.imwrite('g_top.jpg', ii)
+#   cv2.imwrite('g_top.jpg', ii)
 
   cube_img[:cube_img_h / 3, cube_img_w / 2:] = ii.copy()
 
   ii = render_image_np(0, 0, \
                       np.pi / 2, np.pi / 2, \
                       face_size, img)
-  cv2.imwrite('g_front.jpg', ii)
+#   cv2.imwrite('g_front.jpg', ii)
 
   cube_img[cube_img_h / 3:cube_img_h * 2 / 3, :cube_img_w / 2] = rotate_image(ii).copy()
 
   ii = render_image_np(0, np.pi / 2, \
                       np.pi / 2, np.pi / 2, \
                       face_size, img)
-  cv2.imwrite('g_right.jpg', ii)
+#   cv2.imwrite('g_right.jpg', ii)
 
   cube_img[cube_img_h * 2 / 3:, :cube_img_w / 2] = rotate_image(ii).copy()
 
   ii = render_image_np(0, np.pi, \
                       np.pi / 2, np.pi / 2, \
                       face_size, img)
-  cv2.imwrite('g_back.jpg', ii)
+#   cv2.imwrite('g_back.jpg', ii)
 
   cube_img[cube_img_h / 3:cube_img_h * 2 / 3, cube_img_w / 2:] = ii.copy()
 
   ii = render_image_np(0, np.pi * 3 / 2, \
                       np.pi / 2, np.pi / 2, \
                       face_size, img)
-  cv2.imwrite('g_left.jpg', ii)
+#   cv2.imwrite('g_left.jpg', ii)
 
   cube_img[:cube_img_h / 3, :cube_img_w / 2] = rotate_image(ii).copy()
 
   ii = render_image_np(-np.pi / 2, np.pi, \
                       np.pi / 2, np.pi / 2, \
                       face_size, img)
-  cv2.imwrite('g_bottom.jpg', ii)
+#   cv2.imwrite('g_bottom.jpg', ii)
 
   cube_img[cube_img_h * 2 / 3:, cube_img_w / 2:] = ii.copy()
 
-  cv2.imwrite('g_cube.jpg', cube_img)
+#   cv2.imwrite('g_cube.jpg', cube_img)
+  return cube_img
 
 if __name__ == '__main__':
   img = cv2.imread('equi_image.bmp')

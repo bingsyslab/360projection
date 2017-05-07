@@ -17,6 +17,12 @@ def yrotation(th):
 def deg2rad(d):
   return d*np.pi/180
 
+def rotate_image(old_image):
+  (old_height, old_width, _) = old_image.shape
+  M = cv2.getRotationMatrix2D(((old_width - 1) / 2., (old_height - 1) / 2.), 270, 1)
+  rotated = cv2.warpAffine(old_image, M, (old_width, old_height))
+  return rotated
+
 class OffsetCube(Cube):
   def __init__(self, expand_coef, offcenter_z, yaw, pitch, w, h, equi_img, bmp_fn=None):
     self.expand_coef = expand_coef
@@ -113,6 +119,48 @@ def project_offset_face_np(theta0, phi0, f_info, height, width, expand_coef, off
   new_img[DI[:, 1], DI[:, 0]] = img[ey, ex]
     
   return new_img
+
+def equi_to_offset_cube(image):
+  cube_yaw = 0
+  cube_pitch = 0
+
+  face_size = 656
+
+  off_cb = OffsetCube(1.025, -0.7, deg2rad(cube_yaw), deg2rad(cube_pitch), face_size, face_size, image)
+  
+  write_to_cb_img(off_cb, face_size, 'g_offsetcube.jpg')
+
+def equi_to_cube(image):
+  cube_yaw = 0
+  cube_pitch = 0
+
+  face_size = 656
+
+  off_cb = OffsetCube(1.01, 0., deg2rad(cube_yaw), deg2rad(cube_pitch), face_size, face_size, image)
+  
+  write_to_cb_img(off_cb, face_size, 'g_cube.jpg')
+
+def write_to_cb_img(off_cb, face_size, name):
+  cube_img_h = face_size * 3
+  cube_img_w = face_size * 2
+  cube_img = np.zeros((cube_img_h, cube_img_w, 3), np.uint8)
+  
+  for face in off_cb.faces:
+    if face.descr == 'top':
+        cube_img[:cube_img_h / 3, cube_img_w / 2:] = face.img.copy()
+    elif face.descr == 'front':
+        cube_img[cube_img_h / 3:cube_img_h * 2 / 3, :cube_img_w / 2] = rotate_image(face.img).copy()
+    elif face.descr == 'right':
+        cube_img[cube_img_h * 2 / 3:, :cube_img_w / 2] = rotate_image(face.img).copy()
+    elif face.descr == 'back':
+        cube_img[cube_img_h / 3:cube_img_h * 2 / 3, cube_img_w / 2:] = face.img.copy()
+    elif face.descr == 'left':
+        cube_img[:cube_img_h / 3, :cube_img_w / 2] = rotate_image(face.img).copy()
+    elif face.descr == 'bottom':
+        cube_img[cube_img_h * 2 / 3:, cube_img_w / 2:] = face.img.copy()
+  
+  cv2.imwrite(name, cube_img)
+
 
 
 if __name__== '__main__':

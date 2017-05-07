@@ -1,0 +1,28 @@
+{
+  "input" : {
+    "cube" : {
+      "orientation" : {
+        "yaw" : 0,
+        "pitch" : 0
+      },
+      "expand_coef" : 1.025,
+      "offset" : -0.7
+    }
+  },
+  "output" : {
+    "resolution" : {
+      "width" : 1000,
+      "height" : 1000
+    },
+    "render" : {
+      "fov" : {
+        "horizontal" : 100,
+        "vertical" : 100
+      },
+      "orientation" : {
+        "yaw" : 180,
+        "pitch" : 0
+      }
+    }
+  }
+}
