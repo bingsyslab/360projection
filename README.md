@@ -31,3 +31,29 @@ Proceedings of ACM Multimedia Systems (MMSys) 2017
 **cube.py** contains code for contains code for rendering view at a specific angle, vertical and horizontal field of view, and view resolution, given an image in cubic projection. It also contains code for converting the cubic projection to the equirectanglar projection.
 
 **equi_to_offset_cube.py** is used for generating OffsetCube given an equirectangular image as well as OffsetCube settings including the yaw and pitch of offset cube's orientation, width and height of offset cube faces (in pixels), and the magnitude of offcenter_z (e.g., -0.7). 
+
+# Usage
+```
+usage: main.py [-h] config_f img_f
+
+positional arguments:
+  config_f    path to config file
+  img_f       path to input image
+
+optional arguments:
+  -h, --help  show this help message and exit
+```
+config file is a json formatted. A few example config files as well as a `config_template` have been provided in this repo.
+
+For example, to render an equirectangular image, example parameters can be found at `config_equi_render`, then run
+```
+python main.py config_equi_render equi_image.jpg
+```
+To convert an equirectangular image to an offset cube image, use example parameters at `config_equi_to_offcube` and run
+```
+python main config_equi_to_offcube equi_image.jpg
+```
+To render an offset cube image, offset cube parameters (e.g., yaw and pitch of the offset cube, expand coefficient, and offset value) and rendering parameters must be specified in `config_offcube_render`
+```
+python main config_offcube_render offset_image.jpg
+```
