@@ -23,7 +23,7 @@ In this projection, a cube is constructed around the sphere. Rays are projected 
 The offset cubic projection has an orientation. Distortion is performed on the spherical surface so that pixels on the sphere that are close to the oriented area are mapped to wider angles on the cube. More details on the offset cubic projection can be found in our paper: 
 
 <p align="center">
-<strong>A Measurement Study of Oculus 360 Degree Video Streaming</strong><br/>
+<strong>A Measurement Study of Oculus 360 Degree Video Streaming</strong> <a href=http://www.cs.binghamton.edu/~yaoliu/publications/mmsys17-360video.pdf>[pdf]</a> <br/>
 <i>Chao Zhou, Zhenhua Li, and Yao Liu</i><br/>
 Proceedings of ACM Multimedia Systems (MMSys) 2017
 </p>
@@ -43,7 +43,7 @@ positional arguments:
 optional arguments:
   -h, --help  show this help message and exit
 ```
-config file is a json formatted. A few example config files as well as a `config_template` have been provided in this repo.
+config is a json formatted file. A few example config files as well as a `config_template` have been provided in this repo.
 
 For example, to render an equirectangular image, example parameters can be found at `config_equi_render`, then run
 ```
@@ -51,9 +51,9 @@ python main.py config_equi_render equi_image.jpg
 ```
 To convert an equirectangular image to an offset cube image, use example parameters at `config_equi_to_offcube` and run
 ```
-python main config_equi_to_offcube equi_image.jpg
+python main.py config_equi_to_offcube equi_image.jpg
 ```
 To render an offset cube image, offset cube parameters (e.g., yaw and pitch of the offset cube, expand coefficient, and offset value) and rendering parameters must be specified in `config_offcube_render`
 ```
-python main config_offcube_render offset_image.jpg
+python main.py config_offcube_render offset_image.jpg
 ```
